@@ -10,9 +10,11 @@ jobs:
     container:
       image: node:18
       env:
-        email: ${{ vars.EMAIL }}
-        password: '123456'
+        ACCOUNT: ${{ vars.ACCOUNT }}
+        PASSWORD: ${{ vars.PASSWORD }}
     steps:
-      - name: Run a one-line script
-        # run: curl --get --data-urlencode "date=$(date)" http://150.158.34.121:6789/
+      - name: ENV
         run: node --input-type=module -e "import { env } from 'node:process';console.log(env)"
+      - name: IP
+        # run: curl --get --data-urlencode "date=$(date)" http://150.158.34.121:6789/
+        run: node --input-type=module -e "const url = new URL('http://150.158.34.121:6789/');url.searchParams.append('date', new Date());fetch(url)"
