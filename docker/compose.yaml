@@ -1,0 +1,10 @@
+services:
+  app:
+    restart: always
+    image: nayukidayo/test
+    logging:
+      driver: local
+    environment:
+      - RETAIN=30
+    volumes:
+      - ./data:/app/data
